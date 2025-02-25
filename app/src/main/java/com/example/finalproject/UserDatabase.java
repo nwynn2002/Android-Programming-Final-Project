@@ -15,8 +15,8 @@ import java.util.List;
 public class UserDatabase extends SQLiteOpenHelper {
 
     private String TABLE_NAME = "UserDB";
-    private static final String FIRST_NAME_COL = "last_name";
-    private static final String LAST_NAME_COL = "first_name";
+    private static final String FIRST_NAME_COL = "first_name";
+    private static final String LAST_NAME_COL = "last_name";
     private static final String EMAIL_COL = "email";
     private static final String BIRTHDAY_COL = "birthday";
     private static final String USERNAME_COL = "username";
@@ -37,7 +37,7 @@ public class UserDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         String query = " CREATE TABLE " + TABLE_NAME + " ("
                 + USERNAME_COL + " TEXT PRIMARY KEY, "
                 + PASSWORD_COL + " TEXT, "
@@ -46,7 +46,7 @@ public class UserDatabase extends SQLiteOpenHelper {
                 + BIRTHDAY_COL + " DATE,"
                 + GENDER_COL + " TEXT,"
                 + EMAIL_COL + " TEXT, "
-                + RECEIVE_BIRTHDAY_NOTES + "TEXT,"
+                + RECEIVE_BIRTHDAY_NOTES + " TEXT,"
                 + DATE_TIME_CREATED_COL + " DATETIME)";
 
         db.execSQL(query);
@@ -93,19 +93,19 @@ public class UserDatabase extends SQLiteOpenHelper {
 
     public  String checkUniqueUser(String username) {
         String query = "SELECT username FROM " + TABLE_NAME + " WHERE username = \"" + username + "\";";
-        Log.d("=====  Check Unique User - query =======", query);
+        Log.d("Check Unique User - query", query);
 
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor extract = db.rawQuery(query, null);
 
-        Log.d("=====  Check Unique User - count =======", String.valueOf(extract.getCount()));
+        Log.d("Check Unique User - count", String.valueOf(extract.getCount()));
 
         if (extract.getCount() > 0) {
 
             extract.moveToLast();
 
-            Log.d("=====  Check Unique User - string =======", extract.getString(0));
+            Log.d("Check Unique User - string", extract.getString(0));
             //i is column id. Here, it doesn't matter as we are only selecting the specific fieldname (input argument).
             return extract.getString(0);
         }
@@ -117,19 +117,19 @@ public class UserDatabase extends SQLiteOpenHelper {
 
     public  String checkUniqueEmail(String email) {
         String query = "SELECT email FROM " + TABLE_NAME + " WHERE email = \"" + email + "\";";
-        Log.d("=====  Check Unique User - query =======", query);
+        Log.d("Check Unique User - query", query);
 
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor extract = db.rawQuery(query, null);
 
-        Log.d("=====  Check Unique User - count =======", String.valueOf(extract.getCount()));
+        Log.d("Check Unique User - count", String.valueOf(extract.getCount()));
 
         if (extract.getCount() > 0) {
 
             extract.moveToLast();
 
-            Log.d("=====  Check Unique Email - string =======", extract.getString(0));
+            Log.d("Check Unique Email - string", extract.getString(0));
             //i is column id. Here, it doesn't matter as we are only selecting the specific fieldname (input argument).
             return extract.getString(0);
         }
@@ -142,38 +142,38 @@ public class UserDatabase extends SQLiteOpenHelper {
 
     public String checkPassword(String username_or_email) {
         String query = "SELECT password FROM " + TABLE_NAME + " WHERE username = \"" + username_or_email + "\";";
-        Log.d("=====  Check Password - query =======", query);
+        Log.d("Check Password - query", query);
 
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor extract = db.rawQuery(query, null);
 
-        Log.d("=====  Check Password & User- count =======", String.valueOf(extract.getCount()));
+        Log.d("Check Password & User- count", String.valueOf(extract.getCount()));
 
         if (extract.getCount() > 0) {
 
             extract.moveToLast();
 
-            Log.d("=====  Check Password - string =======", extract.getString(0));
+            Log.d("Check Password - string", extract.getString(0));
             //i is column id. Here, it doesn't matter as we are only selecting the specific fieldname (input argument).
             return extract.getString(0);
         }
 
         else {
             query = "SELECT password FROM " + TABLE_NAME + " WHERE email = \"" + username_or_email + "\";";
-            Log.d("=====  Check Password - query =======", query);
+            Log.d("Check Password - query", query);
 
             db = this.getReadableDatabase();
 
             extract = db.rawQuery(query, null);
 
-            Log.d("=====  Check Password & Email - count =======", String.valueOf(extract.getCount()));
+            Log.d("Check Password & Email - count", String.valueOf(extract.getCount()));
 
             if (extract.getCount() > 0) {
 
                 extract.moveToLast();
 
-                Log.d("=====  Check Password - string =======", extract.getString(0));
+                Log.d("Check Password - string", extract.getString(0));
                 //i is column id. Here, it doesn't matter as we are only selecting the specific fieldname (input argument).
                 return extract.getString(0);
             } else {
@@ -185,19 +185,19 @@ public class UserDatabase extends SQLiteOpenHelper {
 
     public String getName(String username) {
         String query = "SELECT name FROM " + TABLE_NAME + " WHERE username = \"" + username + "\";";
-        Log.d("=====  Get Name - query =======", query);
+        Log.d("Get Name - query", query);
 
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor extract = db.rawQuery(query, null);
 
-        Log.d("=====  Get Name - count =======", String.valueOf(extract.getCount()));
+        Log.d("Get Name - count", String.valueOf(extract.getCount()));
 
         if (extract.getCount() > 0) {
 
             extract.moveToLast();
 
-            Log.d("=====  Get Name - string =======", extract.getString(0));
+            Log.d("Get Name - string", extract.getString(0));
             //i is column id. Here, it doesn't matter as we are only selecting the specific fieldname (input argument).
             return extract.getString(0);
         }

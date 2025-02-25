@@ -11,11 +11,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class Login extends AppCompatActivity {
     protected static String CURRENT_USER = "";
     protected static String CURRENT_PASSWORD = "";
+
+
     // Disable the back button
 
     @Override
@@ -32,6 +37,8 @@ public class Login extends AppCompatActivity {
 
         Context c = this;
 
+
+
         // set error_txt to invisible
         TextView error_txt = findViewById(R.id.error_txt2);
         error_txt.setVisibility(View.INVISIBLE);
@@ -41,11 +48,7 @@ public class Login extends AppCompatActivity {
         login_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserDatabase db = new UserDatabase(c, "Users");
 
-                List<String> columnHeaders = db.getColumnHeaders();
-
-                Log.d("====== main activity =====", columnHeaders.toString());
 
                 // get edittext views
                 EditText usernameEdit = findViewById(R.id.usernameEditText3);
@@ -60,13 +63,21 @@ public class Login extends AppCompatActivity {
                     error_txt.setVisibility(View.VISIBLE);
                 }
 
-                else if (db.checkPassword(username).equals(password)) {
+                else if (MainActivity.db.checkPassword(username).equals(password)) {
                     CURRENT_USER = username;
                     CURRENT_PASSWORD = password;
                     MainActivity.backAllowed = false;
 
-                    //Intent intent = new Intent(Login.this, home.class);
-                    //startActivity(intent);
+                    try {
+                        MainActivity.writeFile("AllThingsBooks_User.txt", CURRENT_USER, CURRENT_PASSWORD, "false");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    Intent intent = new Intent(Login.this, UserProfile.class);
+                    startActivity(intent);
                 }
 
                 else {

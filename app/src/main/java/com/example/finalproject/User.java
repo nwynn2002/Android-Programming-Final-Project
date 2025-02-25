@@ -32,7 +32,7 @@ public class User extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        Context c = this;
+
 
         // set error_txt to invisible
         TextView error_txt = findViewById(R.id.error_txt);
@@ -43,13 +43,6 @@ public class User extends AppCompatActivity {
         register_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                UserDatabase db = new UserDatabase(c, "Users");
-
-
-                List<String> columnHeaders = db.getColumnHeaders();
-
-                Log.d("====== main activity =====", columnHeaders.toString());
 
                 // get edittext views
                 EditText firstNameEdit = findViewById(R.id.firstNameEditText);
@@ -91,10 +84,10 @@ public class User extends AppCompatActivity {
                 else {
                     if (verifyPass(password) & verifyUsername(username)) {
                         if (verifyDate(birthday)) {
-                            if (db.checkUniqueUser(username).isEmpty()) {
-                                if (db.checkUniqueEmail(email).isEmpty()) {
+                            if (MainActivity.db.checkUniqueUser(username).isEmpty()) {
+                                if (MainActivity.db.checkUniqueEmail(email).isEmpty()) {
                                     if (password.equals(confirmPassword)) {
-                                        db.addInfo(username, password, firstName, lastName, birthday, gender, email, receiveNotes, created.toString());
+                                        MainActivity.db.addInfo(username, password, firstName, lastName, birthday, gender, email, receiveNotes, created.toString());
 
                                         MainActivity.backAllowed = false;
 
