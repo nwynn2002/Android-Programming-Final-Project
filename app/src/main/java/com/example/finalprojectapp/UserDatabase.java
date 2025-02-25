@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalprojectapp;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -183,8 +183,52 @@ public class UserDatabase extends SQLiteOpenHelper {
         }
     }
 
+    public String getPassword(String username) {
+        String query = "SELECT password FROM " + TABLE_NAME + " WHERE username = \"" + username + "\";";
+        Log.d("Get Password - query", query);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor extract = db.rawQuery(query, null);
+
+        Log.d("Get Password - count", String.valueOf(extract.getCount()));
+
+        if (extract.getCount() > 0) {
+
+            extract.moveToLast();
+
+            Log.d("Get Password - string", extract.getString(0));
+            //i is column id. Here, it doesn't matter as we are only selecting the specific fieldname (input argument).
+            return extract.getString(0);
+        }
+
+        else {
+             query = "SELECT password FROM " + TABLE_NAME + " WHERE email = \"" + username + "\";";
+            Log.d("Get Password - query", query);
+
+            db = this.getReadableDatabase();
+
+            extract = db.rawQuery(query, null);
+
+            Log.d("Get Password - count", String.valueOf(extract.getCount()));
+
+            if (extract.getCount() > 0) {
+
+                extract.moveToLast();
+
+                Log.d("Get Password - string", extract.getString(0));
+                //i is column id. Here, it doesn't matter as we are only selecting the specific fieldname (input argument).
+                return extract.getString(0);
+            }
+
+            else {
+                return "";
+            }
+        }
+    }
+
     public String getName(String username) {
-        String query = "SELECT name FROM " + TABLE_NAME + " WHERE username = \"" + username + "\";";
+        String query = "SELECT first_name FROM " + TABLE_NAME + " WHERE username = \"" + username + "\";";
         Log.d("Get Name - query", query);
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -203,7 +247,27 @@ public class UserDatabase extends SQLiteOpenHelper {
         }
 
         else {
-            return "";
+            query = "SELECT first_name FROM " + TABLE_NAME + " WHERE email = \"" + username + "\";";
+            Log.d("Get Name - query", query);
+
+            db = this.getReadableDatabase();
+
+            extract = db.rawQuery(query, null);
+
+            Log.d("Get Name - count", String.valueOf(extract.getCount()));
+
+            if (extract.getCount() > 0) {
+
+                extract.moveToLast();
+
+                Log.d("Get Name - string", extract.getString(0));
+                //i is column id. Here, it doesn't matter as we are only selecting the specific fieldname (input argument).
+                return extract.getString(0);
+            }
+
+            else {
+                return "";
+            }
         }
     }
 

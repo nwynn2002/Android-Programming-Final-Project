@@ -1,6 +1,5 @@
-package com.example.finalproject;
+package com.example.finalprojectapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,8 +15,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
-import java.util.List;
 
 public class User extends AppCompatActivity {
 
@@ -35,7 +32,7 @@ public class User extends AppCompatActivity {
 
 
         // set error_txt to invisible
-        TextView error_txt = findViewById(R.id.error_txt);
+        TextView error_txt = findViewById(R.id.error_book_txt);
         error_txt.setVisibility(View.INVISIBLE);
 
         Button register_user = findViewById(R.id.registerButton);
