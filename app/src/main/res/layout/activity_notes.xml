@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Notes">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#D4C5E8">
+
+        <TextView
+            android:id="@+id/book_notes_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Book Notes"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:minDate="01/01/2024" />
+
+        <EditText
+            android:id="@+id/note_txt"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="What did you read today?"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/note_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You're note is empty"
+            android:textAlignment="center"
+            android:textColor="#E91E63"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/save_note"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="105dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#A9A5A5"
+            android:text="Save Note"
+            android:textColor="#100F0F" />
+
+        <Button
+            android:id="@+id/del_note"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="105dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#A9A5A5"
+            android:text="Delete Note"
+            android:textColor="#100F0F" />
+
+        <Button
+            android:id="@+id/export_note"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="105dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#A9A5A5"
+            android:text="Export All Notes"
+            android:textColor="#100F0F" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
